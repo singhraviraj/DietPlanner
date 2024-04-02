@@ -13,17 +13,30 @@ public class UserDiet {
         private String ingredients;
         private int calorieIntake;
 
+        @OneToOne(cascade = CascadeType.ALL)
+        @JoinColumn(name = "userDiet_Id")
+        private UserDetailEntity userDetailEntity;
+
         public UserDiet() {
         }
 
-        public UserDiet(int id, int time, String ingredients, int calorieIntake) {
-            this.id = id;
-            this.time = time;
-            this.ingredients = ingredients;
-            this.calorieIntake = calorieIntake;
-        }
+    public UserDiet(int id, int time, String ingredients, int calorieIntake, UserDetailEntity userDetailEntity) {
+        this.id = id;
+        this.time = time;
+        this.ingredients = ingredients;
+        this.calorieIntake = calorieIntake;
+        this.userDetailEntity = userDetailEntity;
+    }
 
-        public int getId() {
+    public UserDetailEntity getUserDetailEntity() {
+        return userDetailEntity;
+    }
+
+    public void setUserDetailEntity(UserDetailEntity userDetailEntity) {
+        this.userDetailEntity = userDetailEntity;
+    }
+
+    public int getId() {
             return id;
         }
 
@@ -55,14 +68,14 @@ public class UserDiet {
             this.calorieIntake = calorieIntake;
         }
 
-        @java.lang.Override
-        public java.lang.String toString() {
-            return "UserDiet{" +
-                    "id=" + id +
-                    ", time=" + time +
-                    ", ingredients='" + ingredients + '\'' +
-                    ", calorieIntake=" + calorieIntake +
-                    '}';
-        }
+    @Override
+    public String toString() {
+        return "UserDiet{" +
+                "id=" + id +
+                ", time=" + time +
+                ", ingredients='" + ingredients + '\'' +
+                ", calorieIntake=" + calorieIntake +
+                '}';
     }
+}
 

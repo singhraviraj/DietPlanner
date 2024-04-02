@@ -13,19 +13,29 @@ public class Credentials {
         private String username;
         private String password;
 
-
-
+        @OneToOne(cascade = CascadeType.ALL)
+        @JoinColumn(name = "userDetail_id")
+        private UserDetailEntity userDetailEntity;
 
         public Credentials() {
         }
 
-        public Credentials(int id, String username, String password) {
-            this.id = id;
-            this.username = username;
-            this.password = password;
-        }
+    public Credentials(int id, String username, String password, UserDetailEntity userDetailEntity) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.userDetailEntity = userDetailEntity;
+    }
 
-        public int getId() {
+    public UserDetailEntity getUserDetailEntity() {
+        return userDetailEntity;
+    }
+
+    public void setUserDetailEntity(UserDetailEntity userDetailEntity) {
+        this.userDetailEntity = userDetailEntity;
+    }
+
+    public int getId() {
             return id;
         }
 
@@ -49,13 +59,12 @@ public class Credentials {
             this.password = password;
         }
 
-        @java.lang.Override
-        public java.lang.String toString() {
-            return "Credentials{" +
-                    "id=" + id +
-                    ", username='" + username + '\'' +
-                    ", password='" + password + '\'' +
-                    '}';
-        }
-
+    @Override
+    public String toString() {
+        return "Credentials{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
+}

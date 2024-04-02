@@ -1,6 +1,8 @@
 package com.dietplanner.entity;
 
 
+import org.hibernate.engine.internal.Cascade;
+
 import javax.persistence.*;
 @Entity
 @Table(name = "userDetailEntity")
@@ -17,20 +19,44 @@ public class UserDetailEntity {
         private float height;
         private float weight;
 
+        @OneToOne(mappedBy = "userDetailEntity")
+        private Credentials credentials;
+
+        @OneToOne(mappedBy = "userDetailEntity")
+        private UserDiet userDiet;
+
         public UserDetailEntity() {
         }
 
-        public UserDetailEntity(int id, int contactNo, String name, String gender, int age, float height, float weight) {
-            this.id = id;
-            this.contactNo = contactNo;
-            this.name = name;
-            this.gender = gender;
-            this.age = age;
-            this.height = height;
-            this.weight = weight;
-        }
+    public UserDetailEntity(int id, String name, int contactNo, String gender, int age, float height, float weight, Credentials credentials, UserDiet userDiet) {
+        this.id = id;
+        this.name = name;
+        this.contactNo = contactNo;
+        this.gender = gender;
+        this.age = age;
+        this.height = height;
+        this.weight = weight;
+        this.credentials = credentials;
+        this.userDiet = userDiet;
+    }
 
-        public int getContactNo() {
+    public UserDiet getUserDiet() {
+        return userDiet;
+    }
+
+    public void setUserDiet(UserDiet userDiet) {
+        this.userDiet = userDiet;
+    }
+
+    public Credentials getCredentials() {
+        return credentials;
+    }
+
+    public void setCredentials(Credentials credentials) {
+        this.credentials = credentials;
+    }
+
+    public int getContactNo() {
             return contactNo;
         }
 
@@ -86,16 +112,16 @@ public class UserDetailEntity {
             this.weight = weight;
         }
 
-        @java.lang.Override
-        public java.lang.String toString() {
-            return "Entity{" +
-                    "id=" + id +
-                    ", name='" + name + '\'' +
-                    ", gender='" + gender + '\'' +
-                    ", age=" + age +
-                    ", height=" + height +
-                    ", weight=" + weight +
-                    '}';
-        }
-
+    @Override
+    public String toString() {
+        return "UserDetailEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", contactNo=" + contactNo +
+                ", gender='" + gender + '\'' +
+                ", age=" + age +
+                ", height=" + height +
+                ", weight=" + weight +
+                '}';
     }
+}
